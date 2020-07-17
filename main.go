@@ -7,21 +7,20 @@ import (
 	"github.com/gocolly/colly"
 )
 
-// ClassName is div's class
-const ClassName string = ".post-content"
-
-// URL is url for scrapping
-const URL string = "https://blog.fintoc.com/mensaje-del-futuro/"
+const (
+	url       = "https://blog.fintoc.com/mensaje-del-futuro/"
+	className = ".post-content"
+)
 
 func main() {
 
 	c := colly.NewCollector()
 
-	c.OnHTML(ClassName, func(div *colly.HTMLElement) {
+	c.OnHTML(className, func(div *colly.HTMLElement) {
 		content := strings.ToLower(div.Text)
 		countF := strings.Count(content, "f")
 		fmt.Println(countF)
 	})
 
-	c.Visit(URL)
+	c.Visit(url)
 }
